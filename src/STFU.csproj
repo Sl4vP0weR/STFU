@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>preview</LangVersion>
+        <Nullable>annotations</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <UserSecretsId>a9bd87cf-f0b9-4f3a-8496-5e5c1891052e</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>.</DockerfileContext>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="STFU.Tests" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="*"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="*"/>
+
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="*-*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*-*"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="*-*">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+
+        <PackageReference Include="Sentry.AspNetCore" Version="*"/>
+
+        <PackageReference Include="Serilog" Version="*"/>
+        <PackageReference Include="Serilog.AspNetCore" Version="*"/>
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="*"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="*"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="*"/>
+
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="*"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="*"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="DependencyInjection.DataBase.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+        <Compile Update="DependencyInjection.Cache.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+        <Compile Update="DependencyInjection.Logs.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+        <Compile Update="DependencyInjection.Swagger.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+        <Compile Update="DependencyInjection.Filters.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+        <Compile Update="DependencyInjection.Controllers.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+        <Compile Update="DependencyInjection.Settings.cs">
+            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Extensions.Strings.cs">
+            <DependentUpon>Extensions.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Extensions.Exceptions.cs">
+            <DependentUpon>Extensions.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Extensions.Collections.cs">
+            <DependentUpon>Extensions.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <Target Name="CleanLogs" BeforeTargets="Build">
+        <Delete Files="logs/**"/>
+        <RemoveDir Directories="logs/" ContinueOnError="true"/>
+    </Target>
+
+</Project>

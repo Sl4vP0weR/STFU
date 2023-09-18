@@ -1,0 +1,1 @@
+All scenarios are intended to be tested on servers with low RAM and CPU resources.
