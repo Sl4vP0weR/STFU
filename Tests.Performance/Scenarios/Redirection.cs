@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace STFU.Tests.Performance.Scenarios;
+﻿namespace STFU.Tests.Performance.Scenarios;
 
 public class Redirection : IScenarioDescriptor
 {

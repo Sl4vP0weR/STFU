@@ -1,4 +1,4 @@
-using static STFU.DependencyInjection;
+using static STFU.StartupExtensions;
 
 namespace STFU;
 
@@ -18,21 +18,30 @@ public class Startup
 
         configuration.AddUserSecrets<AssemblyMarker>();
         
-        builder.AddSerilog();
+        AddSerilog(builder);
+
+        try
+        {
+            AddSentry(builder);
+        }
+        catch (Exception exception)
+        {
+            Log.Warning("Sentry API is disabled due to an exception: \n{Exception}", exception);
+        }
+
+        AddServices(services);
         
-        builder.AddSentry();
+        AddSwagger(services);
 
-        services.AddSwagger();
+        AddSettings(services, configuration);
 
-        services.AddSettings(configuration);
+        AddDataBase(services, configuration);
         
         services.AddOutputCache(ConfigureOutputCache);
         
         services.AddMemoryCache();
 
         services.AddResponseCompression();
-        
-        services.AddDataBase(configuration);
 
         services.AddControllers(ConfigureControllers);
 

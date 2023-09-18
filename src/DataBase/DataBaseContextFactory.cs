@@ -11,7 +11,7 @@ public class DataBaseContextFactory : IDesignTimeDbContextFactory<DataBaseContex
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        services.AddDataBase(configuration);
+        StartupExtensions.AddDataBase(services, configuration);
 
         var host = builder.Build();
 

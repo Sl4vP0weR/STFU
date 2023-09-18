@@ -3,7 +3,7 @@ namespace STFU.Controllers;
 [ApiController]
 [Route("/")]
 public class RootController(
-        DataBaseContext DataBase,
+        IRuleRepository Rules,
         IOptions<RedirectionSettings> RedirectionSettings)
     : ControllerBase
 {
@@ -16,7 +16,7 @@ public class RootController(
     [OutputCache(PolicyName = CachePolicies.Always.Name)]
     public async Task Get([FromRoute] string route)
     {
-        var rule = await DataBase.FindRule(route);
+        var rule = await Rules.Find(route);
         var url = rule?.URL;
 
         if (url.IsNullOrWhiteSpace())
@@ -35,7 +35,7 @@ public class RootController(
 
         ValidateHost(url).TryThrow();
 
-        var rule = await DataBase.GetOrAddRule(url);
+        var rule = await Rules.Ensure(url);
 
         return GetAbsoluteRedirectionURL(rule);
     }

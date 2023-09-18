@@ -47,4 +47,5 @@ global using STFU.DataBase;
 global using STFU.Entities;
 global using STFU.Exceptions;
 global using STFU.Filters;
+global using STFU.Services;
 global using STFU.Settings;

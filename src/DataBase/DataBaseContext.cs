@@ -34,7 +34,7 @@ public class DataBaseContext : DbContext
         entity.Property(x => x.Route)
             .IsRequired()
             .HasMaxLength(100)
-            .HasValueGenerator((property, entityType) => routeValueGenerator);
+            .HasValueGenerator((property, entityType) => RouteValueGenerator);
 
         entity.Property(x => x.URL)
             .IsRequired()
@@ -43,30 +43,9 @@ public class DataBaseContext : DbContext
         entity.HasIndex(x => x.Route).IsUnique();
         entity.HasIndex(x => x.URL).IsUnique();
     }
-
-    private static readonly Func<DataBaseContext, string?, Task<RedirectionRule?>> 
-        findRuleByURL = EF.CompileAsyncQuery((DataBaseContext db, string? url) =>
-            db.Rules.AsNoTracking().FirstOrDefault(x => x.URL == url));
-
-    public Task<RedirectionRule?> FindRule(Uri url) => findRuleByURL(this, url.ToString());
-
-    public Task<RedirectionRule?> FindRule(string? route) => Rules.FindAsync(route).AsTask();
-
-    private readonly static AlphanumericValueGenerator routeValueGenerator = new()
+    
+    public readonly static AlphanumericValueGenerator RouteValueGenerator = new()
     {
         Length = 8
     };
-    
-    public async Task<RedirectionRule> AddRule(Uri url, string? route = null)
-    {
-        var rule = new RedirectionRule(url, route);
-
-        await Rules.AddAsync(rule);
-        await SaveChangesAsync();
-
-        return rule;
-    }
-
-    public async Task<RedirectionRule> GetOrAddRule(Uri url, string? route = null) =>
-        await FindRule(url) ?? await AddRule(url, route);
 }

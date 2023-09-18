@@ -2,7 +2,7 @@ namespace STFU.Entities;
 
 public partial class RedirectionRule : IEntity
 {
-    public string Route { get; set; }
+    public string? Route { get; set; }
     
     public string URL { get; set; }
 
@@ -10,10 +10,10 @@ public partial class RedirectionRule : IEntity
     public RedirectionRule(Uri url, string? route = null) : this()
     {
         URL = url.ToString();
-        Route = route!;
+        Route = route;
     }
     
-    public override string ToString() => Route;
+    public override string ToString() => Route.EnsureSafe();
 
     public override bool Equals(object? obj) => 
         obj is RedirectionRule other && 
@@ -22,5 +22,5 @@ public partial class RedirectionRule : IEntity
     protected bool Equals(RedirectionRule other) => 
         GetHashCode() == other.GetHashCode();
 
-    public override int GetHashCode() => Route.GetHashCode();
+    public override int GetHashCode() => Route.EnsureSafe().GetHashCode();
 }

@@ -2,6 +2,11 @@ namespace STFU;
 
 public static partial class Extensions
 {
+    /// <summary>
+    /// Ensures input string is not null.
+    /// </summary>
+    public static string EnsureSafe(this string? str) => str ?? "";
+    
     public static string TrimStart(this string str, string trimString)
     {
         var result = new StringBuilder(str);

@@ -9,6 +9,7 @@ to show-case my skills and knowledge.
 I've kept in mind performance, so it should be pretty fast.
 
 #### Planned features:
+- Health checks.
 - Rule expiration by max usages or passed time.
 - Generation rate limits.
 

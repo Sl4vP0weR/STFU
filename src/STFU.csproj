@@ -39,26 +39,29 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="DependencyInjection.DataBase.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.DataBase.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
-        <Compile Update="DependencyInjection.Cache.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.Cache.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
-        <Compile Update="DependencyInjection.Logs.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.Logs.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
-        <Compile Update="DependencyInjection.Swagger.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.Swagger.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
-        <Compile Update="DependencyInjection.Filters.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.Filters.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
-        <Compile Update="DependencyInjection.Controllers.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.Controllers.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
-        <Compile Update="DependencyInjection.Settings.cs">
-            <DependentUpon>DependencyInjection.cs</DependentUpon>
+        <Compile Update="StartupExtensions.Settings.cs">
+            <DependentUpon>StartupExtensions.cs</DependentUpon>
+        </Compile>
+        <Compile Update="StartupExtensions.Services.cs">
+          <DependentUpon>StartupExtensions.cs</DependentUpon>
         </Compile>
     </ItemGroup>
 
